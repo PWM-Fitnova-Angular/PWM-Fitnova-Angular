@@ -1,0 +1,96 @@
+.main-body{
+  background-color: #071013;
+  display: flex;
+  flex:1;
+  gap:20px;
+
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+
+}
+.main-image{
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+
+  height: 400px;
+  padding: 70px 100px;
+  margin: 20px;
+  border-radius: 25px;
+
+
+  /*background-image: url("../../Images/dumbbell-1966704_1280.jpg");*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: white;
+
+}
+.main-content{
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.35);
+  padding: 20px;
+  border-radius: 10px;
+  gap: 40px;
+
+  max-width: 350px;
+  word-wrap: break-word;
+  text-align: center;
+}
+.main-text{
+  text-align: center;
+  line-height: 1.8;
+  font-size: 17px;
+
+}
+.main-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px auto;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: none;
+
+  background-color: rgb(0, 0, 0, 0.8);
+  color: #ffffff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+
+  font-size: 16px;
+  font-weight: bold;
+
+}
+.main-button:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.05);
+}
+
+
+@media screen and (max-width: 430px) {
+  .main-image{
+    padding: 10px;
+  }
+  .main-content{
+    padding: 10px;
+    gap:15px;
+    max-width: 250px;
+  }
+  .main-text{
+    text-align: center;
+    line-height: 1.8;
+    font-size: 11px;
+
+  }
+  .main-button{
+    font-size: 13px;
+  }
+}

@@ -1,10 +1,13 @@
 import {Component, ElementRef, input, ViewChild} from '@angular/core';
 import {NgForOf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {registerUser} from '../../firebase/firebaseAuthService';
 
 @Component({
   selector: 'app-register',
   imports: [
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -23,12 +26,19 @@ export class RegisterComponent {
     'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Turkey',
     'Ukraine', 'United Kingdom'
   ];
+  name: string = '';
+  email: string = '';
+  number: string = '';
+  birthday: string = '';
+  selectedSex: string = '';
+  country: string = '';
+  password: string = '';
 
+  registerUserButton() {
 
-  registerUser() {
-
+      registerUser(this.email, this.password).then()
 
   }
-  @ViewChild('name_login') input!: ElementRef;
+
 }
 

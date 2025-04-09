@@ -3,30 +3,30 @@
   <div class="form-container">
     <div class="login-container">
       <label for="name_login">Name & surname</label>
-      <input #name_login type="text" id="name_login" name="name_login" placeholder="Add your full name" required>
+      <input [(ngModel)]="name"  type="text" id="name_login" name="name_login" placeholder="Add your full name" required>
       <label for="email_login">Email</label>
-      <input type="email" id="email_login" name="email_login" placeholder="Add your email" required>
+      <input [(ngModel)]="email" type="email" id="email_login" name="email_login" placeholder="Add your email" required>
       <label for="number_login">Number</label>
-      <input type="tel" id="number_login" name="number_login" placeholder="Add your number" required>
+      <input [(ngModel)]="number" type="tel" id="number_login" name="number_login" placeholder="Add your number" required>
       <label for="birthday_login">Birthday</label>
-      <input type="date" id="birthday_login" name="birthday_login" required>
+      <input [(ngModel)]="birthday" type="date" id="birthday_login" name="birthday_login" required>
       <fieldset>
         <legend>Sex: </legend>
         <label for="male">Male</label>
-        <input type="radio" id="male" name="sex" value="male">
+        <input type="radio" id="male" name="sex" value="male" [(ngModel)]="selectedSex">
         <label for="female">Female</label>
-        <input type="radio" id="female" name="sex" value="female">
+        <input type="radio" id="female" name="sex" value="female" [(ngModel)]="selectedSex">
         <label for="other">Other</label>
-        <input type="radio" id="other" name="sex" value="other">
+        <input type="radio" id="other" name="sex" value="other" [(ngModel)]="selectedSex">
       </fieldset>
       <label for="country">Choose your country:</label>
-      <input list="country" name="browser" id="browser">
+      <input list="country" name="browser" id="browser" [(ngModel)]="country">
       <datalist id="country">
         <option *ngFor="let country of countries" [value]="country"></option>
       </datalist>
       <label for="password">Password</label>
-      <input type="password" id="password" name="email" placeholder="Add your password" required>
-      <button class="register" (click)="registerUser()">Register</button>
+      <input [(ngModel)]="password" type="password" id="password" name="email" placeholder="Add your password" required>
+      <button class="register" (click)="registerUserButton()">Register</button>
     </div>
     <a href="login.html" class="login">Login</a>
   </div>

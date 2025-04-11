@@ -2,10 +2,6 @@ import { initializeApp} from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {FirebaseApp} from "firebase/app";
 
-
-
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyBfLuGRIEqjVtgXLtqjGv0VsuFF7SBp2Lg",
   authDomain: "fitnova-e3e7d.firebaseapp.com",

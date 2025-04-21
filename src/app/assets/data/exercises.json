@@ -1,0 +1,22 @@
+[
+  { "name": "Biceps Curl - Arms", "type": "Strength", "image": "assets/img/dumbbell-1966704_1280.jpg" },
+  { "name": "Lat Pulldown - Back", "type": "Hypertrophy", "image": "assets/img/lat_pulldown.webp" },
+  { "name": "Bench Press - Chest", "type": "Strength", "image": "assets/img/bench_press.jpg" },
+  { "name": "Deadlift - Full Body", "type": "Strength", "image": "assets/img/deadlift.jpg" },
+  { "name": "Squat - Legs", "type": "Strength", "image": "assets/img/squat.webp" },
+  { "name": "Leg Press - Legs", "type": "Hypertrophy", "image": "assets/img/leg_press.jpg" },
+  { "name": "Shoulder Press - Shoulders", "type": "Strength", "image": "assets/img/shoulder_press.jpg" },
+  { "name": "Tricep Dips - Arms", "type": "Hypertrophy", "image": "assets/img/tricep_dips.jpg" },
+  { "name": "Pull-ups - Back", "type": "Strength", "image": "assets/img/pull_ups.webp" },
+  { "name": "Plank - Core", "type": "Resistance", "image": "assets/img/plank.jpeg" },
+  { "name": "Jump Rope - Full Body", "type": "Cardio", "image": "assets/img/jump_rope.webp" },
+  { "name": "Rowing Machine - Back", "type": "Cardio", "image": "assets/img/rowing_machine.webp" },
+  { "name": "Lunges - Legs", "type": "Hypertrophy", "image": "assets/img/lunges.png" },
+  { "name": "Russian Twists - Core", "type": "Resistance", "image": "assets/img/russian-twist.jpg" },
+  { "name": "Burpees - Full Body", "type": "Cardio", "image": "assets/img/burpees.avif" },
+  { "name": "Cable Fly - Chest", "type": "Hypertrophy", "image": "assets/img/cable_fly.jpg" },
+  { "name": "Seated Calf Raise - Calves", "type": "Hypertrophy", "image": "assets/img/seated-calf-raise.webp" },
+  { "name": "Face Pull - Shoulders", "type": "Hypertrophy", "image": "assets/img/face-pull.webp" },
+  { "name": "Battle Ropes - Arms", "type": "Cardio", "image": "assets/img/battle_ropes.avif" },
+  { "name": "Leg Curls - Hamstrings", "type": "Hypertrophy", "image": "assets/img/leg_curls.jpeg" }
+]

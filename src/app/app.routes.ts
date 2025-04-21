@@ -8,11 +8,11 @@ import {SettingsComponent} from './settings/settings.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'settings', component: SettingsComponent},
   { path: 'premium', component: PremiumComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'exercises', component: ExerciseRecipesComponent},
   { path: 'recipes', component: ExerciseRecipesComponent},
-  { path: 'settings', component: SettingsComponent},
-  { path: '**' ,redirectTo: 'home', pathMatch: 'full' },
+  { path: '**' ,redirectTo: 'home', pathMatch: 'full' }
 ];

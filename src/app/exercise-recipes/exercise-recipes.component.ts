@@ -18,6 +18,9 @@ export class ExerciseRecipesComponent implements OnInit {
   mainItems: string[] = [];
   sideItems: string[] = [];
   title: string = '';
+  mainIcons: string[] = [];
+  sideIcons: string[] = [];
+
 
   constructor(private router: Router) {}
 
@@ -29,23 +32,29 @@ export class ExerciseRecipesComponent implements OnInit {
       this.loadExercises();
     }
   }
-  private loadExercises(){
-    this.title= 'WORKOUTS';
-    this.bodyClass= 'exercise-body';
-    this.mainItems= ['Arm exercises', 'Chest exercises', 'Back exercises', 'Leg exercises'];
-    this.sideItems= [
+  private loadExercises() {
+    this.title = 'WORKOUTS';
+    this.bodyClass = 'exercise-body';
+    this.mainItems = ['Arm exercises', 'Chest exercises', 'Back exercises', 'Leg exercises'];
+    this.mainIcons = ['fa-dumbbell', 'fa-heart', 'fa-backward', 'fa-walking'];
+
+    this.sideItems = [
       'Cardio exercises',
       'Pulley exercises',
       'Machine exercises',
       'Dumbbell exercises',
       'Body exercises'
     ];
+    this.sideIcons = ['fa-running', 'fa-cogs', 'fa-tools', 'fa-dumbbell', 'fa-user'];
   }
 
   private loadRecipes() {
     this.title= 'RECIPES';
     this.bodyClass= 'recipes-body';
     this.mainItems= ['Breakfast', 'Lunch', 'Snack', 'Dinner'];
+    this.mainIcons = ['fa-coffee', 'fa-hamburger', 'fa-cookie', 'fa-drumstick-bite'];
+    this.sideIcons = ['fa-seedling', 'fa-leaf', 'fa-egg', 'fa-ice-cream', 'fa-box'];
+
     this.sideItems= [
       'Vegan recipes',
       'Vegetarian recipes',
@@ -53,6 +62,7 @@ export class ExerciseRecipesComponent implements OnInit {
       'Desserts recipes',
       'Meal Prep recipes'
     ];
+    this.sideIcons = ['fa-running', 'fa-cogs', 'fa-tools', 'fa-dumbbell', 'fa-user'];
   }
 
 

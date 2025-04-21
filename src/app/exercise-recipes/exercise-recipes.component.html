@@ -3,17 +3,16 @@
 
 <div class="exercise-content">
   <section class="horizontal-filters">
-    <div class="filter-box" *ngFor="let item of mainItems">
-      <span class="icon">🔍</span>
-      <div> TEST </div>
+    <div class="filter-box" *ngFor="let item of mainItems; let i = index">
+      <span class="icon"><i class="fas" [ngClass]="mainIcons[i]"></i></span>
       <span>{{ item }}</span>
     </div>
   </section>
 
   <div class="container">
     <aside class="sidebar">
-      <div class="sidebar-item" *ngFor="let side of sideItems">
-        <span class="icon">📂</span>
+      <div class="sidebar-item" *ngFor="let side of sideItems; let i = index">
+        <span class="icon"><i class="fas" [ngClass]="sideIcons[i]"></i></span>
         <span>{{ side }}</span>
       </div>
     </aside>

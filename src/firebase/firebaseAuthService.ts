@@ -9,6 +9,17 @@ export async function registerUser(email: string, password: string) {
   }catch(err) {}
 }
 
+export async function loginUser(email: string, password: string) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+  }
+}
+
+
+
+
+
 
 
 

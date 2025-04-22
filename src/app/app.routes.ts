@@ -5,6 +5,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {RegisterComponent} from './register/register.component';
 import {ExerciseRecipesComponent} from './exercise-recipes/exercise-recipes.component';
 import {SettingsComponent} from './settings/settings.component';
+import {LoginComponent} from './login/login.component';
+
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,5 +16,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'exercises', component: ExerciseRecipesComponent},
   { path: 'recipes', component: ExerciseRecipesComponent},
+  { path: 'login', component: LoginComponent},
   { path: '**' ,redirectTo: 'home', pathMatch: 'full' }
 ];

@@ -18,6 +18,7 @@ import { auth } from '../../firebase/firebase_config'; // tu config original
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errorMessage: any;
 
   constructor(private router: Router) {
     onAuthStateChanged(auth, (user) => {
@@ -29,9 +30,13 @@ export class LoginComponent {
 
   onLogin() {
     loginUser(this.email, this.password)
-      .then(() => this.router.navigate(['/home']))
+      .then(() => {
+        this.router.navigate(['/home']);
+      })
       .catch((err) => {
         console.error('Error al iniciar sesión:', err.message);
+        alert('Usuario o contraseña incorrectos. Por favor, intenta de nuevo.');
       });
   }
+
 }

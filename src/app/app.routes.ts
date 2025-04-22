@@ -6,6 +6,8 @@ import {RegisterComponent} from './register/register.component';
 import {ExerciseRecipesComponent} from './exercise-recipes/exercise-recipes.component';
 import {SettingsComponent} from './settings/settings.component';
 import {LoginComponent} from './login/login.component';
+import {PaymentComponent} from './payment/payment.component';
+import {DeleteComponent} from './delete/delete.component';
 
 
 export const routes: Routes = [
@@ -17,5 +19,7 @@ export const routes: Routes = [
   { path: 'exercises', component: ExerciseRecipesComponent},
   { path: 'recipes', component: ExerciseRecipesComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'payment', component: PaymentComponent},
+  { path: 'delete', component: DeleteComponent},
   { path: '**' ,redirectTo: 'home', pathMatch: 'full' }
 ];

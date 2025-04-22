@@ -17,6 +17,7 @@ main.login-container {
   justify-content: center;
   flex-grow: 1;
   padding: 20px;
+  background: #000;
 }
 
 .login-container div {

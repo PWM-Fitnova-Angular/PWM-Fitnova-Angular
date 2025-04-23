@@ -11,7 +11,9 @@ export async function registerUser(email: string, password: string) {
 
 export async function loginUser(email: string, password: string) {
   try {
+    console.log('Login successful');
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
   } catch (error) {
   }
 }

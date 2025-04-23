@@ -23,15 +23,19 @@ export class LoginComponent {
   constructor(private router: Router) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        this.router.navigate(['/home']);
+        //this.router.navigate(['/home']);
+        console.log('Login Component');
       }
     });
   }
 
   onLogin() {
+    console.log('Login Component');
     loginUser(this.email, this.password)
       .then(() => {
-        this.router.navigate(['/home']);
+        console.log('Login successful');
+        //this.router.navigate(['/home']);
+
       })
       .catch((err) => {
         console.error('Error al iniciar sesión:', err.message);

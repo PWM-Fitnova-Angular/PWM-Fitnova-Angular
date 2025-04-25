@@ -46,25 +46,33 @@ export class RegisterComponent {
     });
   }
 
-  registerUserButton() {
 
-      registerUser(this.email, this.password).then();
-      const uid = sessionStorage.getItem("userUid");
-      const data = {
-        UserEmail: this.email,
-        UserPassword: this.password,
-        birthday: this.birthday,
-        selectedSex: this.selectedSex,
-        country: this.country,
-        nameSurname: this.name,
-        sex: this.selectedSex
+    async registerUserButton() {
+      try {
+        await registerUser(this.email, this.password);
+        const uid = sessionStorage.getItem("userUid");
+
+        if ( !uid) {
+          throw new Error("UID not found in sessionStorage.");
+        }
+
+        const data = {
+          UserEmail: this.email,
+          UserPassword: this.password,
+          birthday: this.birthday,
+          selectedSex: this.selectedSex,
+          country: this.country,
+          nameSurname: this.name,
+          sex: this.selectedSex
+        };
+
+        await saveUserData(uid, data);
+        this.router.navigate(['/home']);
+      } catch (error) {
+        console.error("Registration error:", error);
       }
+    }
 
-      saveUserData(uid, data).then();
-      this.router.navigate(['/home']);
-
-
-  }
 
 }
 

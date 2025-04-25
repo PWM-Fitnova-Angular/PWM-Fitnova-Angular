@@ -1,14 +1,18 @@
-import { doc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import {auth, db} from './firebase_config';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { updateDoc } from 'firebase/firestore/lite';
 
 
-export async function registerUser(email: string, password: string) {
+
+export async function registerUser(email: string, password: string): Promise<string> {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth,email, password);
-    sessionStorage.setItem("userUid", userCredential.user.uid);
-  }catch(err) {}
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    return userCredential.user.uid;
+  } catch (err) {
+    console.error("Error al registrar usuario:", err);
+    throw err;
+  }
 }
 
 export async function loginUser(email: string, password: string) {
@@ -20,11 +24,11 @@ export async function loginUser(email: string, password: string) {
   }
 }
 
-export const saveUserData = async (uid: string , data: Partial<Record<string, any>>) => {
+export const saveUserData = async (uid: string, data: Partial<Record<string, any>>) => {
   try {
     const userRef = doc(db, "Users", uid);
     await updateDoc(userRef, data);
-    console.log("Datos actualizados correctamente.");
+    console.log("Datos guardados correctamente.");
   } catch (error) {
     console.error("Error al guardar datos:", error);
   }

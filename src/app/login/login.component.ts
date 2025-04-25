@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { loginUser } from '../../firebase/firebaseAuthService';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../firebase/firebase_config'; // tu config original
+import { auth } from '../../firebase/firebase_config';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +18,11 @@ import { auth } from '../../firebase/firebase_config'; // tu config original
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  errorMessage: any;
+
 
   constructor(private router: Router) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        //this.router.navigate(['/home']);
         console.log('Login Component');
       }
     });
@@ -34,8 +33,7 @@ export class LoginComponent {
     loginUser(this.email, this.password)
       .then(() => {
         console.log('Login successful');
-        //this.router.navigate(['/home']);
-
+        this.router.navigate(['/home']);
       })
       .catch((err) => {
         console.error('Error al iniciar sesión:', err.message);

@@ -9,28 +9,28 @@
         </div>
         <div class="input-box">
           <span>Name On Card :</span>
-          <input type="text" placeholder="Sofia Aguilar Santana">
+          <input type="text" placeholder="Sofia Aguilar Santana" [(ngModel)]="fullname">
         </div>
         <div class="input-box">
           <span>Credit Card Number :</span>
-          <input type="number" placeholder="1111 2222 3333 4444">
+          <input type="number" placeholder="1111 2222 3333 4444" [(ngModel)]="creditCard">
         </div>
         <div class="input-box">
           <span>Exp. Month :</span>
-          <input type="text" placeholder="August">
+          <input type="text" placeholder="August" [(ngModel)]="Month">
         </div>
 
         <div class="flex">
           <div class="input-box">
             <span>Exp. Year :</span>
-            <input type="number" placeholder="2025">
+            <input type="number" placeholder="2025" [(ngModel)]="year">
           </div>
-          <div class="input-box">
+          <div class="input-box">est
             <span>CVV :</span>
-            <input type="number" placeholder="123">
+            <input type="number" placeholder="123" #cvv>
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" (click)="onSubmit()">Submit</button>
       </div>
     </form>
   </div>

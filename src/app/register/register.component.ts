@@ -2,7 +2,9 @@ import {Component, ElementRef, input, ViewChild} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {registerUser} from '../../firebase/firebaseAuthService';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {onAuthStateChanged} from 'firebase/auth';
+import {auth} from '../../firebase/firebase_config';
 
 @Component({
   selector: 'app-register',
@@ -36,9 +38,18 @@ export class RegisterComponent {
   country: string = '';
   password: string = '';
 
+  constructor(private router: Router) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('Login Component');
+      }
+    });
+  }
+
   registerUserButton() {
 
       registerUser(this.email, this.password).then();
+      this.router.navigate(['/home']);
 
 
   }

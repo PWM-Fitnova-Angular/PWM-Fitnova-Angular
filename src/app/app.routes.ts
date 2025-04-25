@@ -8,6 +8,10 @@ import {SettingsComponent} from './settings/settings.component';
 import {LoginComponent} from './login/login.component';
 import {PaymentComponent} from './payment/payment.component';
 import {DeleteComponent} from './delete/delete.component';
+import {DetailsWorkoutRecipeComponent} from './templates/details-workout-recipe/details-workout-recipe.component';
+import {
+  SavedRecipesWorkoutsProgressComponent
+} from './templates/saved-recipes-workouts-progress/saved-recipes-workouts-progress.component';
 
 
 export const routes: Routes = [
@@ -22,5 +26,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'payment', component: PaymentComponent},
   { path: 'delete', component: DeleteComponent},
+  { path: 'details', component: DetailsWorkoutRecipeComponent},
+  { path: 'saved progress', component: SavedRecipesWorkoutsProgressComponent},
   { path: '**' ,redirectTo: 'home', pathMatch: 'full' }
 ];

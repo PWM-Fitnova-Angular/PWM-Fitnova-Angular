@@ -11,6 +11,7 @@ import {DeleteComponent} from './delete/delete.component';
 
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/register', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'settings', component: SettingsComponent},
   { path: 'premium', component: PremiumComponent },

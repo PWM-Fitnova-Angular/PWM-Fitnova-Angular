@@ -1,7 +1,7 @@
 import {Component, ElementRef, input, ViewChild} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {registerUser} from '../../firebase/firebaseAuthService';
+import {registerUser, saveUserData} from '../../firebase/firebaseAuthService';
 import {Router, RouterLink} from '@angular/router';
 import {onAuthStateChanged} from 'firebase/auth';
 import {auth} from '../../firebase/firebase_config';
@@ -49,6 +49,18 @@ export class RegisterComponent {
   registerUserButton() {
 
       registerUser(this.email, this.password).then();
+      const uid = sessionStorage.getItem("userUid");
+      const data = {
+        UserEmail: this.email,
+        UserPassword: this.password,
+        birthday: this.birthday,
+        selectedSex: this.selectedSex,
+        country: this.country,
+        nameSurname: this.name,
+        sex: this.selectedSex
+      }
+
+      saveUserData(uid, data).then();
       this.router.navigate(['/home']);
 
 

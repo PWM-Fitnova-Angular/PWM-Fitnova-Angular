@@ -48,7 +48,7 @@ export class RegisterComponent {
 
   async registerUserButton() {
     try {
-      const uid = await registerUser(this.email, this.password);
+
 
       const data = {
         UserEmail: this.email,
@@ -59,7 +59,7 @@ export class RegisterComponent {
         nameSurname: this.name,
       };
 
-      await saveUserData(uid, data);
+      await registerUser(this.email, this.password, data);
       this.router.navigate(['/home']);
     } catch (error) {
       console.error("Error al registrar usuario:", error);

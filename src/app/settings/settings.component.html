@@ -3,29 +3,29 @@
 <main class="setting-container">
   <div class="cont">
     <label class="mode-label">Dark Mode</label>
-    <input type="checkbox" id="dark-mode" class="mode">
+    <input type="checkbox" id="dark-mode" class="mode" [(ngModel)]="darkMode">
   </div>
   <div class="cont">
     <fieldset>
       <legend class="mode-label">Profile</legend>
       <label for="public">Public</label>
-      <input type="radio" id="public" name="profile" value="public">
+      <input type="radio" id="public" name="profile" value="public" [(ngModel)]="privacySetting">
       <label for="private">Private</label>
-      <input type="radio" id="private" name="profile" value="private">
+      <input type="radio" id="private" name="profile" value="private" [(ngModel)]="privacySetting">
     </fieldset>
   </div>
   <div class="cont">
     <fieldset>
       <legend class="mode-label">Email notification</legend>
       <label for="yes">Yes</label>
-      <input type="radio" id="yes" name="notify" value="yes">
+      <input type="radio" id="yes" name="notify" value="yes" [(ngModel)]="notificationsEnabled">
       <label for="no">No</label>
-      <input type="radio" id="no" name="notify" value="no">
+      <input type="radio" id="no" name="notify" value="no"[(ngModel)]="notificationsEnabled">
     </fieldset>
   </div>
   <div class="cont">
     <label class="mode-label" for="language">Choose your language:</label>
-    <input list="language" name="language" id="langu">
+    <input list="language" name="language" id="langu" [(ngModel)]="language">
     <datalist id="language">
       <option value="Spanish">
       <option value="English">
@@ -45,8 +45,10 @@
     </fieldset>
   </div>
   <div class="but">
+    <button class="delete-button" (click)="saveSettings()">Save Settings</button>
     <a [routerLink]="['/delete']" class="delete-button">Delete Account</a>
   </div>
+
 </main>
 
 </body>

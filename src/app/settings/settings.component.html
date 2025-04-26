@@ -34,13 +34,13 @@
   <div class="cont">
     <fieldset>
       <legend class="mode-label">Change Password</legend>
-      <label class="mode-label" for="old-password">Old Password</label>
-      <input type="password" id="old-password" name="old-password">
+      <label class="mode-label" for="old-password" >Old Password</label>
+      <input type="password" id="old-password" name="old-password" [(ngModel)]="oldPassword">
       <label class = "mode-label" for="new-password">New Password</label>
-      <input type="password" id="new-password" name="new-password">
+      <input type="password" id="new-password" name="new-password" [(ngModel)]="newPassword">
       <label class = "mode-label" for="confirm-password">Confirm New Password</label>
-      <input type="password" id="confirm-password" name="confirm-password">
-      <button type="button" class="change-button" onclick="setupPasswordChange()">Change</button>
+      <input type="password" id="confirm-password" name="confirm-password" [(ngModel)]="confirmPassword">
+      <button type="button" class="change-button" (click)="changeUserPassword()">Change</button>
       <div id="password-message" class="message"></div>
     </fieldset>
   </div>

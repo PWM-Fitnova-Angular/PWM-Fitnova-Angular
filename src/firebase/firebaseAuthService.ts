@@ -1,6 +1,9 @@
+
 import { doc, getDoc, setDoc, updateDoc  } from 'firebase/firestore';
 import {auth, db} from './firebase_config';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
+
 
 
 async function createNewUser(uid: string, data: Object) {
@@ -57,9 +60,29 @@ export async function getUserData(userUid: string): Promise<any> {
 }
 
 
+export async function changeUserPassword(oldPassword: string, newPassword: string): Promise<void> {
+  const user = auth.currentUser;
 
+  if (!user) {
+    throw new Error("Usuario no autenticado.");
+  }
 
+  try {
+    const credential = EmailAuthProvider.credential(
+      user.email || '',
+      oldPassword
+    );
+    await reauthenticateWithCredential(user, credential);
+    await updatePassword(user, newPassword);
+    const userRef = doc(db, "Users", user.uid);
+    await updateDoc(userRef, {
+      UserPassword: newPassword
+    });
 
-
-
+    console.log("Contraseña actualizada correctamente.");
+  } catch (error) {
+    console.error("Error al cambiar la contraseña:", error);
+    throw error;
+  }
+}
 

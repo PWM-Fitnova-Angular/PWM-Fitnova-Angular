@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgClass, NgForOf} from '@angular/common';
-import {ExerciseRecipeCardComponent} from '../templates/exercise-recipe-card/exercise-recipe-card.component';
+
 import {ActivatedRoute, Router} from '@angular/router';
+import {ExerciseRecipeCardComponent} from '../../templates/exercise-recipe-card/exercise-recipe-card.component';
 
 @Component({
   selector: 'app-exercise-recipes',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {changeUserPassword, registerUser, saveUserData} from '../../firebase/firebaseAuthService';
+import {changeUserPassword, registerUser, saveUserData} from '../../../firebase/firebaseAuthService';
 import {onAuthStateChanged} from 'firebase/auth';
-import {auth} from '../../firebase/firebase_config';
+import {auth} from '../../../firebase/firebase_config';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

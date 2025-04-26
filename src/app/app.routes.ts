@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {PremiumComponent} from './premium/premium.component';
-import {ProfileComponent} from './profile/profile.component';
-import {RegisterComponent} from './register/register.component';
-import {ExerciseRecipesComponent} from './exercise-recipes/exercise-recipes.component';
-import {SettingsComponent} from './settings/settings.component';
-import {LoginComponent} from './login/login.component';
-import {PaymentComponent} from './payment/payment.component';
-import {DeleteComponent} from './delete/delete.component';
-import {DetailsWorkoutRecipeComponent} from './templates/details-workout-recipe/details-workout-recipe.component';
+
+import {HomeComponent} from './components/home/home.component';
+import {SettingsComponent} from './components/settings/settings.component';
+import {PremiumComponent} from './components/premium/premium.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import {RegisterComponent} from './components/register/register.component';
+import {ExerciseRecipesComponent} from './components/exercise-recipes/exercise-recipes.component';
+import {LoginComponent} from './components/login/login.component';
+import {PaymentComponent} from './components/payment/payment.component';
+import { DeleteComponent } from './components/delete/delete.component';
+import { DetailsWorkoutRecipeComponent } from './templates/details-workout-recipe/details-workout-recipe.component';
 import {
   SavedRecipesWorkoutsProgressComponent
 } from './templates/saved-recipes-workouts-progress/saved-recipes-workouts-progress.component';

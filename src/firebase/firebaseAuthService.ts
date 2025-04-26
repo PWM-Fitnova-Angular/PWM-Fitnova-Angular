@@ -38,8 +38,6 @@ export async function loginUser(email: string, password: string) {
 
 export const saveUserData = async (uid: string, data: Partial<Record<string, any>>) => {
   try {
-    console.log(uid);
-    console.log(data);
     const userRef = doc(db, "Users", uid);
     await updateDoc(userRef, data);
     console.log("Datos guardados correctamente.");

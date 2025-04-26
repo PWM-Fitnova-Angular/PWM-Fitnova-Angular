@@ -1,10 +1,10 @@
 import {Component, ElementRef, input, ViewChild} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {registerUser, saveUserData} from '../../firebase/firebaseAuthService';
+import {registerUser, saveUserData} from '../../../firebase/firebaseAuthService';
 import {Router, RouterLink} from '@angular/router';
 import {onAuthStateChanged} from 'firebase/auth';
-import {auth} from '../../firebase/firebase_config';
+import {auth} from '../../../firebase/firebase_config';
 
 @Component({
   selector: 'app-register',

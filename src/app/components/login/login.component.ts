@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { loginUser } from '../../firebase/firebaseAuthService';
+
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../firebase/firebase_config';
+import {auth} from '../../../firebase/firebase_config';
+import {loginUser} from '../../../firebase/firebaseAuthService';
+
 
 @Component({
   selector: 'app-login',

@@ -29,10 +29,11 @@ export async function registerUser(email: string, password: string, data: Object
 
 export async function loginUser(email: string, password: string) {
   try {
-    console.log('Login successful');
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-  } catch (error) {
+    return userCredential;
+  } catch (error: any) {
+    console.error('Error al iniciar sesión:', error.message);
+    throw error;
   }
 }
 

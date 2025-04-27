@@ -1,5 +1,5 @@
 
-import { doc, getDoc, setDoc, updateDoc  } from 'firebase/firestore';
+import {collection, doc, getDoc, getDocs, setDoc, updateDoc  } from 'firebase/firestore';
 import {auth, db} from './firebase_config';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
@@ -84,3 +84,17 @@ export async function changeUserPassword(oldPassword: string, newPassword: strin
   }
 }
 
+export async function getAllDocumentsFromCollection(collectionName:string): Promise<any> {
+  try {
+    const colRef = collection(db, collectionName);
+    const colSnap = await getDocs(colRef);
+
+    const docs:any = [];
+    colSnap.forEach(doc => {
+      docs.push({id:doc.id, ...doc.data()});
+    });
+    return docs;
+  }catch (error) {
+    console.error("Error getAllDocumentsFromCollection:", error);
+  }
+}

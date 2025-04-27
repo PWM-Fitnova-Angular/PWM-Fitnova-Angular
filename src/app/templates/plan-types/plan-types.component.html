@@ -3,32 +3,18 @@
   <h2 class="plan-title">PLANS</h2>
 
   <!-- Plan types-->
-  <article class="container">
+  <article class="container" >
 
-    <article class="plan-card">
-      <span class="card-title">Basic</span>
+    <article class="plan-card"*ngFor="let plan of plans" >
+      <span class="card-title">{{ plan.name }}</span>
 
       <ul class="unordered-text-list">
+        <li *ngFor="let description of plan.descriptions">{{ description }}</li>
 
       </ul>
       <p><span class="price">$0</span> /monthly</p>
       <a [routerLink]="'/payment'" class="plan-button">Get Started</a>
     </article>
 
-    <article class="plan-card">
-      <span class="card-title">Standard</span>
-      <ul class="unordered-text-list">
-      </ul>
-      <p><span class="price">$12</span> /monthly</p>
-      <a [routerLink]="'/payment'" class="plan-button">Get Started</a>
-    </article>
-
-    <article class="plan-card">
-      <span class="card-title">Premium</span>
-      <ul class="unordered-text-list">
-      </ul>
-      <p><span class="price">$22</span> /monthly</p>
-      <a [routerLink]="'/payment'" class="plan-button">Get Started</a>
-    </article>
-
   </article>
+</div>

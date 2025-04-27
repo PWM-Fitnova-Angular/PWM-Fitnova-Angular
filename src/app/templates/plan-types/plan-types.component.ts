@@ -23,20 +23,23 @@ export class PlanTypesComponent {
     this.globals.webData$.subscribe((webData) => {
       for (const item of webData) {
         this.plansData = item.planTypes;
+        console.log(this.plansData);
         this.initPlans();
+
       }
     });
 
   }
   private initPlans() {
-    const order = ['basic', 'standard', 'premium']
+    const order = ['Basic', 'Standard', 'Premium'];
     for (const planName of order) {
-      if(this.plansData.hasOwnProperty(planName)) {
+      if (this.plansData.hasOwnProperty(planName)) {
+        const planInfo = this.plansData[planName];
         this.plans.push({
           name: planName,
-          descriptions: this.plansData[planName]
+          descriptions: planInfo.description || [],
+          price: planInfo.price || 0
         });
-        console.log(this.plansData[planName]);
       }
     }
   }

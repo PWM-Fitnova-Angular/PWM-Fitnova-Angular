@@ -12,7 +12,7 @@
         <li *ngFor="let description of plan.descriptions">{{ description }}</li>
 
       </ul>
-      <p><span class="price">$0</span> /monthly</p>
+      <p><span class="price">${{plan.price}}</span> /monthly</p>
       <a [routerLink]="'/payment'" class="plan-button">Get Started</a>
     </article>
 

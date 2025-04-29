@@ -20,14 +20,13 @@
     <main class="content">
       <h2>{{ title }}</h2>
       <div id="grid" class="grid">
-        <app-exercise-recipe-card></app-exercise-recipe-card>
-        <app-exercise-recipe-card></app-exercise-recipe-card>
-        <app-exercise-recipe-card></app-exercise-recipe-card>
-        <app-exercise-recipe-card></app-exercise-recipe-card>
-        <app-exercise-recipe-card></app-exercise-recipe-card>
-        <app-exercise-recipe-card></app-exercise-recipe-card>
-        <app-exercise-recipe-card></app-exercise-recipe-card>
-        <app-exercise-recipe-card></app-exercise-recipe-card>
+        <ng-container *ngIf="cardItems.length > 0">
+          <app-exercise-recipe-card
+            *ngFor="let item of cardItems"
+            [cardLabel]="item.cardLabel"
+            [cardTitle]="item.cardTitle">
+          </app-exercise-recipe-card>
+        </ng-container>
       </div>
     </main>
   </div>

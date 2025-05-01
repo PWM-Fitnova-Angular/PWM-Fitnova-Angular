@@ -10,9 +10,7 @@ import {LoginComponent} from './components/login/login.component';
 import {PaymentComponent} from './components/payment/payment.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { DetailsWorkoutRecipeComponent } from './templates/details-workout-recipe/details-workout-recipe.component';
-import {
-  SavedRecipesWorkoutsProgressComponent
-} from './templates/saved-recipes-workouts-progress/saved-recipes-workouts-progress.component';
+import {SavedRecipesWorkoutsProgressComponent} from './templates/saved-recipes-workouts-progress/saved-recipes-workouts-progress.component';
 
 
 export const routes: Routes = [

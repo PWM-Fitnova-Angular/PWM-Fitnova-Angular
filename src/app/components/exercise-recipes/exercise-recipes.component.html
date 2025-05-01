@@ -25,7 +25,8 @@
             *ngFor="let item of cardItems"
             [cardLabel]="item.type"
             [cardTitle]="item.name"
-            [cardImage]="item.imageUrl">
+            [cardImage]="item.imageUrl"
+            [cardObject]="item">
 
           </app-exercise-recipe-card>
         </ng-container>

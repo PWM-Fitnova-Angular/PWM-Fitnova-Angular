@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-exercise-recipe-card',
@@ -18,9 +18,13 @@ export class ExerciseRecipeCardComponent {
   @Input() cardLabel: string = 'Strength';
   @Input() cardTitle: string = 'Test';
   @Input() cardImage: string = 'Test';
+  @Input() cardObject: any;
+
+
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  constructor(private router: Router) {}
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -76,5 +80,11 @@ export class ExerciseRecipeCardComponent {
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
     }
+  }
+
+  showDetails(cardObject: any) {
+    this.router.navigate(['/details'],{
+      state: {cardObject}
+    });
   }
 }

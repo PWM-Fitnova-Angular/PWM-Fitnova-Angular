@@ -7,7 +7,7 @@
     (change)="onFileSelected($event)"
   >
 
-  <a routerLink="/details" class="card-link">
+  <div (click)="showDetails(cardObject)" class="card-link">
     <div class="card-label">{{ cardLabel }}</div>
 
     <div class="image-grid" [ngClass]="{'edit-mode': isEditMode}">
@@ -46,5 +46,5 @@
 
     <div class="card-title">{{ cardTitle }}</div>
     <div class="card-icon">🛈</div>
-  </a>
+  </div>
 </div>

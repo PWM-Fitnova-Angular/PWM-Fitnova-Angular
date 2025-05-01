@@ -56,6 +56,7 @@ export class ExerciseRecipesComponent implements OnInit {
 
     this.cardItems = await this.exerciseService.getExercises();
     console.log(this.cardItems);
+    console.log(typeof this.cardItems[0]);
   }
 
   private loadRecipes() {

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import {ExerciseRecipeCardComponent} from '../../templates/exercise-recipe-card/exercise-recipe-card.component';
+import { ExerciseService } from '../../services/exercise.service';
 
 @Component({
   selector: 'app-exercise-recipes',
@@ -25,7 +26,7 @@ export class ExerciseRecipesComponent implements OnInit {
 
   cardItems: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private exerciseService: ExerciseService) {}
 
   ngOnInit() {
     const route = this.router.url
@@ -38,7 +39,7 @@ export class ExerciseRecipesComponent implements OnInit {
     this.loadCardItems();
   }
 
-  private loadExercises() {
+  private async loadExercises() {
     this.title = 'WORKOUTS';
     this.bodyClass = 'exercise-body';
     this.mainItems = ['Arm exercises', 'Chest exercises', 'Back exercises', 'Leg exercises'];
@@ -52,6 +53,9 @@ export class ExerciseRecipesComponent implements OnInit {
       'Body exercises'
     ];
     this.sideIcons = ['fa-running', 'fa-cogs', 'fa-tools', 'fa-dumbbell', 'fa-user'];
+
+    this.cardItems = await this.exerciseService.getExercises();
+    console.log(this.cardItems);
   }
 
   private loadRecipes() {
@@ -74,16 +78,7 @@ export class ExerciseRecipesComponent implements OnInit {
     const isExercises = this.router.url.includes('exercises');
 
     if (isExercises) {
-      this.cardItems = [
-        { cardLabel: 'Strength', cardTitle: 'Bench Press' },
-        { cardLabel: 'Cardio', cardTitle: 'Running' },
-        { cardLabel: 'Strength', cardTitle: 'Squats' },
-        { cardLabel: 'Flexibility', cardTitle: 'Stretching' },
-        { cardLabel: 'Cardio', cardTitle: 'Cycling' },
-        { cardLabel: 'Strength', cardTitle: 'Pull-ups' },
-        { cardLabel: 'Cardio', cardTitle: 'Jump Rope' },
-        { cardLabel: 'Strength', cardTitle: 'Deadlift' }
-      ];
+
     } else {
       this.cardItems = [
         { cardLabel: 'Breakfast', cardTitle: 'Oatmeal Bowl' },

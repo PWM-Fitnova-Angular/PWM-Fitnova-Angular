@@ -11,7 +11,7 @@
     <div class="card-label">{{ cardLabel }}</div>
 
     <div class="image-grid" [ngClass]="{'edit-mode': isEditMode}">
-      <img [src]="imagePreview" alt="" class="card-image">
+      <img [src]="cardImage" alt="" class="card-image">
 
       <div class="image-overlay" *ngIf="isEditMode">
         <div class="overlay-content">

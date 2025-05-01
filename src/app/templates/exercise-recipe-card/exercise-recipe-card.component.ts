@@ -17,6 +17,7 @@ export class ExerciseRecipeCardComponent {
 
   @Input() cardLabel: string = 'Strength';
   @Input() cardTitle: string = 'Test';
+  @Input() cardImage: string = 'Test';
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 

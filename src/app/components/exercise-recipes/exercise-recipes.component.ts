@@ -18,6 +18,8 @@ import {RecipeService} from '../../services/recipes.service';
   styleUrl: './exercise-recipes.component.css'
 })
 export class ExerciseRecipesComponent implements OnInit {
+
+
   bodyClass: string = '';
   mainItems: string[] = [];
   sideItems: string[] = [];
@@ -25,7 +27,9 @@ export class ExerciseRecipesComponent implements OnInit {
   mainIcons: string[] = [];
   sideIcons: string[] = [];
 
+  allItems: any[] = [];
   cardItems: any[] = [];
+  topFilterActive: string | null = null;
 
   constructor(private router: Router, private exerciseService: ExerciseService, private recipeService: RecipeService) {}
 
@@ -53,7 +57,10 @@ export class ExerciseRecipesComponent implements OnInit {
     ];
     this.sideIcons = ['fa-running', 'fa-cogs', 'fa-tools', 'fa-dumbbell', 'fa-user'];
 
-    this.cardItems = await this.exerciseService.getExercises();
+    const data = await this.exerciseService.getExercises();
+    this.allItems = data;
+    this.cardItems = [...data]
+
   }
 
   private async loadRecipes() {
@@ -71,8 +78,25 @@ export class ExerciseRecipesComponent implements OnInit {
     ];
     this.sideIcons = ['fa-seedling', 'fa-leaf', 'fa-egg', 'fa-ice-cream', 'fa-box'];
 
-    this.cardItems = await this.recipeService.getRecipes();
-    console.log(this.cardItems);
+    const data = await this.recipeService.getRecipes();
+    this.allItems = data;
+    this.cardItems = [...data]
+  }
+
+  topFilter(item: string) {
+
+    item = item.split(' ')[0];
+
+    if (this.topFilterActive === item) {
+      this.topFilterActive = null;
+      this.cardItems = [...this.allItems];
+    } else {
+      this.topFilterActive = item;
+      this.cardItems = this.allItems.filter(e =>
+        e.muscleGroups?.includes(item) || e.categories?.includes(item)
+      );
+    }
+
   }
 
 }

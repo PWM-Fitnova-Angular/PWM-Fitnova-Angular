@@ -3,7 +3,11 @@
 
 <div class="exercise-content">
   <section class="horizontal-filters">
-    <div class="filter-box" *ngFor="let item of mainItems; let i = index">
+    <div class="filter-box"
+         *ngFor="let item of mainItems let i = index"
+          (click)="topFilter(item)"
+          [class.active]="topFilterActive === item"
+    >
       <span class="icon"><i class="fas" [ngClass]="mainIcons[i]"></i></span>
       <span>{{ item }}</span>
     </div>

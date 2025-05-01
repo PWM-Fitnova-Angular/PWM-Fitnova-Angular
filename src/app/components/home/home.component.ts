@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalsService } from '../../services/globlals.service';
 import { PlanTypesComponent } from '../../templates/plan-types/plan-types.component';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,

@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class DetailsWorkoutRecipeComponent {
 
-  exercise:any;
+  card:any;
 
   constructor(private router:Router) {
     const nav = this.router.getCurrentNavigation();
-    this.exercise = nav?.extras?.state?.['cardObject'];
-    console.log(this.exercise);
+    this.card = nav?.extras?.state?.['cardObject'];
+
   }
 
 

@@ -5,7 +5,7 @@ import {Router, RouterLink} from '@angular/router';
 @Component({
   selector: 'app-exercise-recipe-card',
   standalone: true,
-  imports: [NgIf, RouterLink, NgClass],
+  imports: [NgIf, NgClass],
   templateUrl: './exercise-recipe-card.component.html',
   styleUrls: ['./exercise-recipe-card.component.css']
 })

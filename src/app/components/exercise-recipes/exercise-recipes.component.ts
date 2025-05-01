@@ -3,6 +3,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import {ExerciseRecipeCardComponent} from '../../templates/exercise-recipe-card/exercise-recipe-card.component';
 import { ExerciseService } from '../../services/exercise.service';
+import {RecipeService} from '../../services/recipes.service';
 
 @Component({
   selector: 'app-exercise-recipes',
@@ -26,7 +27,7 @@ export class ExerciseRecipesComponent implements OnInit {
 
   cardItems: any[] = [];
 
-  constructor(private router: Router, private exerciseService: ExerciseService) {}
+  constructor(private router: Router, private exerciseService: ExerciseService, private recipeService: RecipeService) {}
 
   ngOnInit() {
     const route = this.router.url
@@ -35,8 +36,6 @@ export class ExerciseRecipesComponent implements OnInit {
     }else if(route.includes('exercises')) {
       this.loadExercises();
     }
-
-    this.loadCardItems();
   }
 
   private async loadExercises() {
@@ -55,11 +54,9 @@ export class ExerciseRecipesComponent implements OnInit {
     this.sideIcons = ['fa-running', 'fa-cogs', 'fa-tools', 'fa-dumbbell', 'fa-user'];
 
     this.cardItems = await this.exerciseService.getExercises();
-    console.log(this.cardItems);
-    console.log(typeof this.cardItems[0]);
   }
 
-  private loadRecipes() {
+  private async loadRecipes() {
     this.title= 'RECIPES';
     this.bodyClass= 'recipes-body';
     this.mainItems= ['Breakfast', 'Lunch', 'Snack', 'Dinner'];
@@ -73,24 +70,9 @@ export class ExerciseRecipesComponent implements OnInit {
       'Meal Prep recipes'
     ];
     this.sideIcons = ['fa-seedling', 'fa-leaf', 'fa-egg', 'fa-ice-cream', 'fa-box'];
+
+    this.cardItems = await this.recipeService.getRecipes();
+    console.log(this.cardItems);
   }
 
-  private loadCardItems() {
-    const isExercises = this.router.url.includes('exercises');
-
-    if (isExercises) {
-
-    } else {
-      this.cardItems = [
-        { cardLabel: 'Breakfast', cardTitle: 'Oatmeal Bowl' },
-        { cardLabel: 'Lunch', cardTitle: 'Chicken Salad' },
-        { cardLabel: 'Snack', cardTitle: 'Protein Bar' },
-        { cardLabel: 'Dinner', cardTitle: 'Salmon with Veggies' },
-        { cardLabel: 'Breakfast', cardTitle: 'Protein Pancakes' },
-        { cardLabel: 'Lunch', cardTitle: 'Quinoa Bowl' },
-        { cardLabel: 'Snack', cardTitle: 'Greek Yogurt' },
-        { cardLabel: 'Dinner', cardTitle: 'Turkey Meatballs' }
-      ];
-    }
-  }
 }

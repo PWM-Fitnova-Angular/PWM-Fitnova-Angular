@@ -8,11 +8,18 @@
     <a routerLink="recipes">Recipes</a>
     <a routerLink="premium">Premium</a>
   </nav>
+
   <div class="right">
-    <!-- el router link del boton deberia llevar al login, de momento tiene register para comprobar firebase-->
-    <button><a class="header-link" routerLink="login">Login</a></button>
-    <a routerLink="profile">
-      <img src="../../Images/Profile.jpg" alt="Logo">
+    <button *ngIf="!isLoggedIn">
+      <a class="header-link" routerLink="login">Login</a>
+    </button>
+
+    <button *ngIf="isLoggedIn" (click)="logout()">
+      Logout
+    </button>
+
+    <a *ngIf="isLoggedIn" routerLink="profile">
+      <img src="../../Images/Profile.jpg" alt="Perfil">
     </a>
   </div>
 </div>

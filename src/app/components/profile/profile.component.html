@@ -2,7 +2,7 @@
 <main class="container">
   <div class="profile-settings">
     <section class="user-profile-image">
-      <img class="user-profile-image" src="../assets/img/Profile.jpg" alt="" height="708" width="736">
+      <img class="user-profile-image" src="app/assets/img/Profile.jpg">
     </section>
     <article class="user-profile-options">
       <div class="user-profile-grid">
@@ -11,7 +11,7 @@
         <button class="user-profile-card-button" [routerLink]="['/saved progress']">Workout Progress</button>
         <button class="user-profile-card-button">Profile</button>
         <button class="user-profile-card-button">Posts</button>
-        <button class="user-profile-card-button">Log Out</button>
+        <button class="user-profile-card-button" (click)="logout()">Log Out</button>
       </div>
     </article>
   </div>

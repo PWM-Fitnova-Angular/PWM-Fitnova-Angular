@@ -85,26 +85,21 @@ export class ExerciseRecipesComponent implements OnInit {
   }
 
   topFilter(item: string) {
-
     const parte = item.split(' ')[0];
-
     this.topFilterActive = (this.topFilterActive === parte) ? null : parte;
     this.applyFilters();
-
+    this.updateBodyClass();
   }
+
   sideFilter(item: string) {
     const parte = item.split(' ')[0];
-
     this.sideFilterActive = (this.sideFilterActive === parte) ? null : parte;
     this.applyFilters();
+    this.updateBodyClass();
   }
 
   private applyFilters() {
-
-
-
     let cardsFiltered = [...this.allItems];
-
 
     if (this.topFilterActive) {
       const topFilter = this.topFilterActive;
@@ -112,7 +107,6 @@ export class ExerciseRecipesComponent implements OnInit {
         item.muscleGroups?.includes(topFilter) ||
         item.categories?.includes(topFilter)
       );
-
     }
 
     if (this.sideFilterActive) {
@@ -123,10 +117,20 @@ export class ExerciseRecipesComponent implements OnInit {
       );
     }
 
-
     this.cardItems = cardsFiltered;
-
   }
 
+  isAnyFilterActive(): boolean {
+    return this.topFilterActive !== null || this.sideFilterActive !== null;
+  }
 
+  private updateBodyClass(): void {
+    const baseClass = this.router.url.includes('recipes') ? 'recipes-body' : 'exercise-body';
+
+    if (this.isAnyFilterActive()) {
+      this.bodyClass = `${baseClass} filter-active`;
+    } else {
+      this.bodyClass = baseClass;
+    }
+  }
 }

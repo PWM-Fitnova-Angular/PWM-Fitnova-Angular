@@ -4,12 +4,13 @@
 <div class="exercise-content">
   <section class="horizontal-filters">
     <div class="filter-box"
-         *ngFor="let item of mainItems let i = index"
-          (click)="topFilter(item)"
-          [class.active]="topFilterActive === item"
+         *ngFor="let item of mainItems; let i = index"
+         (click)="topFilter(item)"
+         [class.active]="topFilterActive === item.split(' ')[0]"
+         [attr.data-short]="item.split(' ')[0].substr(0, 1)"
     >
       <span class="icon"><i class="fas" [ngClass]="mainIcons[i]"></i></span>
-      <span>{{ item }}</span>
+      <span class="filter-text">{{ item }}</span>
     </div>
   </section>
 
@@ -17,8 +18,8 @@
     <aside class="sidebar">
       <div class="sidebar-item"
            *ngFor="let side of sideItems; let i = index"
-            (click)="sideFilter(side)"
-            [class.active]="sideFilterActive === side">
+           (click)="sideFilter(side)"
+           [class.active]="sideFilterActive === side.split(' ')[0]">
         <span class="icon"><i class="fas" [ngClass]="sideIcons[i]"></i></span>
         <span>{{ side }}</span>
       </div>
@@ -34,7 +35,6 @@
             [cardTitle]="item.name"
             [cardImage]="item.imageUrl"
             [cardObject]="item">
-
           </app-exercise-recipe-card>
         </ng-container>
       </div>

@@ -38,6 +38,14 @@
   border-radius: 15px;
 }
 
+.filter-box.active, .sidebar-item.active {
+  background: #4CAF50;
+  color: white;
+  border: 2px solid #2E7D32;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+  transform: scale(1.05);
+}
+
 .icon {
   width: 20px;
   height: 20px;
@@ -50,6 +58,11 @@
 .filter-box:hover, .sidebar-item:hover {
   background: #ddd;
   transform: scale(1.05);
+}
+
+.filter-box.active:hover, .sidebar-item.active:hover {
+  background: #4CAF50;
+  color: white;
 }
 
 .sidebar {
@@ -183,6 +196,13 @@ h2 {
   .filter-box::after {
     content: attr(data-short);
     font-size: 14px;
+  }
+
+  /* Estilos para móviles con filtros activos */
+  .filter-box.active, .sidebar-item.active {
+    background: #4CAF50;
+    color: white;
+    border: 2px solid #2E7D32;
   }
 
   .sidebar {

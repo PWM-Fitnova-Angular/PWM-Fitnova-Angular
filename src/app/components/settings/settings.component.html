@@ -1,101 +1,123 @@
 <body>
 <header id="header"></header>
 <main class="setting-container">
-  <div class="cont">
-    <label class="mode-label">Dark Mode</label>
-    <input type="checkbox" id="dark-mode" class="mode" [(ngModel)]="darkMode" name="DarkMode">
-  </div>
-  <div class="cont">
-    <fieldset>
-      <legend class="mode-label">Profile</legend>
-      <label for="public">Public</label>
-      <input type="radio" id="public"  value="public" [(ngModel)]="privacySetting" name="privacySetting">
-      <label for="private">Private</label>
-      <input type="radio" id="private" name="privacySetting" value="private" [(ngModel)]="privacySetting">
-    </fieldset>
-  </div>
-  <div class="cont">
-    <fieldset>
-      <legend class="mode-label">Email notification</legend>
-      <label for="yes">Yes</label>
-      <input type="radio" id="yes" name="notificationsEnabled" value="yes" [(ngModel)]="notificationsEnabled">
-      <label for="no">No</label>
-      <input type="radio" id="no" name="notificationsEnabled" value="no"[(ngModel)]="notificationsEnabled">
-    </fieldset>
-  </div>
-  <div class="cont">
-    <label class="mode-label" for="language">Choose your language:</label>
-    <input list="language" name="language" id="langu" [(ngModel)]="language">
-    <datalist id="language">
-      <option value="Spanish">
-      <option value="English">
-    </datalist>
-  </div>
-  <div class="cont">
-  <form #pwForm="ngForm" (ngSubmit)="changeUserPassword(pwForm)" novalidate>
-    <fieldset>
-      <legend>Change Password</legend>
+  <!-- Formulario de configuraciones -->
+  <form [formGroup]="settingsForm">
+    <div class="cont">
+      <label class="mode-label">Dark Mode</label>
+      <input type="checkbox" id="dark-mode" class="mode" formControlName="darkMode">
+    </div>
 
-      <label for="old-password">Old Password</label>
-      <input
-        id="old-password"
-        name="oldPassword"
-        type="password"
-        required
-        [(ngModel)]="oldPassword"
-        #oldPw="ngModel"
-      >
-      <div *ngIf="oldPw.invalid && (oldPw.dirty || oldPw.touched)" class="error">
-        <small *ngIf="oldPw.errors?.required">Old password is required.</small>
-      </div>
+    <div class="cont">
+      <fieldset>
+        <legend class="mode-label">Profile</legend>
+        <label for="public">Public</label>
+        <input type="radio" id="public" value="public" formControlName="privacySetting">
+        <label for="private">Private</label>
+        <input type="radio" id="private" value="private" formControlName="privacySetting">
+      </fieldset>
+    </div>
 
-      <label for="new-password">New Password</label>
-      <input
-        id="new-password"
-        name="newPassword"
-        type="password"
-        required minlength="8"
-        [(ngModel)]="newPassword"
-        #newPw="ngModel"
-      >
-      <div *ngIf="newPw.invalid && (newPw.dirty || newPw.touched)" class="error">
-        <small *ngIf="newPw.errors?.required">New password is required.</small>
-        <small *ngIf="newPw.errors?.minlength">At least 8 characters.</small>
-      </div>
+    <div class="cont">
+      <fieldset>
+        <legend class="mode-label">Email notification</legend>
+        <label for="yes">Yes</label>
+        <input type="radio" id="yes" value="true" formControlName="notificationsEnabled">
+        <label for="no">No</label>
+        <input type="radio" id="no" value="false" formControlName="notificationsEnabled">
+      </fieldset>
+    </div>
 
-      <label for="confirm-password">Confirm New Password</label>
-      <input
-        id="confirm-password"
-        name="confirmPassword"
-        type="password"
-        required
-        [(ngModel)]="confirmPassword"
-        #confirmPw="ngModel"
-      >
-      <div *ngIf="confirmPw.invalid && (confirmPw.dirty || confirmPw.touched)" class="error">
-        <small *ngIf="confirmPw.errors?.required">Confirmation is required.</small>
-      </div>
-
-      <button class="delete-button" type="submit">Change</button>
-
-      <div
-        id="password-message"
-        [ngClass]="{
-          'message-success': passwordMessageType==='success',
-          'message-warning': passwordMessageType==='warning',
-          'message-error':   passwordMessageType==='error'
-        }"
-      >
-        {{ passwordMessage }}
-      </div>
-    </fieldset>
+    <div class="cont">
+      <label class="mode-label" for="language">Choose your language:</label>
+      <input list="language" id="langu" formControlName="language">
+      <datalist id="language">
+        <option value="Spanish">
+        <option value="English">
+      </datalist>
+    </div>
   </form>
+
+  <!-- Formulario de cambio de contraseña -->
+  <div class="cont">
+    <form [formGroup]="passwordForm" (ngSubmit)="changeUserPassword()">
+      <fieldset>
+        <legend>Change Password</legend>
+
+        <label for="old-password">Old Password</label>
+        <input
+          id="old-password"
+          type="password"
+          formControlName="oldPassword"
+        >
+        <div *ngIf="passwordForm.get('oldPassword')?.invalid &&
+                    (passwordForm.get('oldPassword')?.dirty ||
+                     passwordForm.get('oldPassword')?.touched)"
+             class="error">
+          <small *ngIf="passwordForm.get('oldPassword')?.errors?.['required']">
+            Old password is required.
+          </small>
+        </div>
+
+        <label for="new-password">New Password</label>
+        <input
+          id="new-password"
+          type="password"
+          formControlName="newPassword"
+        >
+        <div *ngIf="passwordForm.get('newPassword')?.invalid &&
+                    (passwordForm.get('newPassword')?.dirty ||
+                     passwordForm.get('newPassword')?.touched)"
+             class="error">
+          <small *ngIf="passwordForm.get('newPassword')?.errors?.['required']">
+            New password is required.
+          </small>
+          <small *ngIf="passwordForm.get('newPassword')?.errors?.['minlength']">
+            At least 8 characters.
+          </small>
+          <small *ngIf="passwordForm.get('newPassword')?.errors?.['pattern']">
+            Must contain uppercase letters and numbers.
+          </small>
+        </div>
+
+        <label for="confirm-password">Confirm New Password</label>
+        <input
+          id="confirm-password"
+          type="password"
+          formControlName="confirmPassword"
+        >
+        <div *ngIf="passwordForm.get('confirmPassword')?.invalid &&
+                    (passwordForm.get('confirmPassword')?.dirty ||
+                     passwordForm.get('confirmPassword')?.touched)"
+             class="error">
+          <small *ngIf="passwordForm.get('confirmPassword')?.errors?.['required']">
+            Confirmation is required.
+          </small>
+          <small *ngIf="passwordForm.get('confirmPassword')?.errors?.['mismatch']">
+            Passwords do not match.
+          </small>
+        </div>
+
+        <button class="delete-button" type="submit" [disabled]="passwordForm.invalid">Change</button>
+
+        <div
+          id="password-message"
+          *ngIf="passwordMessage"
+          [ngClass]="{
+            'message-success': passwordMessageType==='success',
+            'message-warning': passwordMessageType==='warning',
+            'message-error':   passwordMessageType==='error'
+          }"
+        >
+          {{ passwordMessage }}
+        </div>
+      </fieldset>
+    </form>
   </div>
+
   <div class="but">
-    <button class="delete-button" (click)="saveSettings()">Save Settings</button>
+    <button class="delete-button" (click)="saveSettings()" [disabled]="settingsForm.invalid">Save Settings</button>
     <a [routerLink]="['/delete']" class="delete-button">Delete Account</a>
   </div>
-
 </main>
-
 </body>

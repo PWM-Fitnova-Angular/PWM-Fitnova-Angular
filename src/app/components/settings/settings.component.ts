@@ -1,111 +1,136 @@
-import {Component, OnInit} from '@angular/core';
-import {FormsModule, NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { changeUserPassword, saveUserData, getUserData } from '../../../firebase/firebaseAuthService';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../../firebase/firebase_config';
-import {NgClass, NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
-
+import { NgClass, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   imports: [
-    FormsModule,
+    ReactiveFormsModule,
     NgClass,
     RouterLink,
     NgIf
   ],
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent implements OnInit{
-  darkMode = false;
-  notificationsEnabled = false;
-  privacySetting: 'public' | 'private' = 'public';
-  language = '';
+export class SettingsComponent implements OnInit {
+  settingsForm!: FormGroup;
+  passwordForm!: FormGroup;
+
   uid = '';
-
-  oldPassword = '';
-  newPassword = '';
-  confirmPassword = '';
-
   passwordMessage = '';
   passwordMessageType: 'success' | 'warning' | 'error' = 'success';
 
+  constructor(private fb: FormBuilder) {
+    onAuthStateChanged(auth, user => {
+      if (user) this.uid = user.uid;
+    });
+  }
+
   ngOnInit(): void {
+    this.initSettingsForm();
+    this.initPasswordForm();
+
     onAuthStateChanged(auth, async user => {
       if (!user) return;
       this.uid = user.uid;
 
       const data = await getUserData(this.uid);
       if (data) {
-        this.darkMode             = !!data.darkMode;
-        this.notificationsEnabled = !!data.notificationsEnabled;
-        this.privacySetting       = data.privacySetting || 'public';
-        this.language             = data.language || '';
+        this.settingsForm.patchValue({
+          darkMode: !!data.darkMode,
+          notificationsEnabled: !!data.notificationsEnabled,
+          privacySetting: data.privacySetting || 'public',
+          language: data.language || ''
+        });
       }
     });
   }
 
-  constructor() {
-    onAuthStateChanged(auth, user => {
-      if (user) this.uid = user.uid;
+  private initSettingsForm(): void {
+    this.settingsForm = this.fb.group({
+      darkMode: [false],
+      notificationsEnabled: [false],
+      privacySetting: ['public'],
+      language: ['']
     });
+  }
+
+  private initPasswordForm(): void {
+    this.passwordForm = this.fb.group({
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/.*[A-Z].*/),  // At least one uppercase letter
+        Validators.pattern(/.*[0-9].*/)   // At least one number
+      ]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validator: this.passwordMatchValidator });
+  }
+
+  private passwordMatchValidator(form: FormGroup): { [key: string]: boolean } | null {
+    const newPassword = form.get('newPassword')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+
+    if (newPassword !== confirmPassword) {
+      form.get('confirmPassword')?.setErrors({ mismatch: true });
+      return { 'mismatch': true };
+    }
+
+    return null;
   }
 
   async saveSettings(): Promise<void> {
     if (!this.uid) {
-      console.error("Usuario no autenticado");
+      console.error("User not authenticated");
       return;
     }
-    const settingsData = {
-      darkMode: this.darkMode,
-      notificationsEnabled: this.notificationsEnabled,
-      privacySetting: this.privacySetting,
-      language: this.language
-    };
+
+    if (this.settingsForm.invalid) {
+      return;
+    }
+
+    const settingsData = this.settingsForm.value;
+
     try {
       await saveUserData(this.uid, settingsData);
-      alert('Settings guardados exitosamente.');
+      alert('Settings saved successfully.');
     } catch {
-      alert('Error al guardar settings.');
+      alert('Error saving settings.');
     }
   }
 
-  async changeUserPassword(form: NgForm) {
-    if (form.invalid) {
-      this.setPasswordMessage('All fields are required', 'warning');
+  async changeUserPassword() {
+    if (this.passwordForm.invalid) {
+      if (this.passwordForm.errors?.['mismatch']) {
+        this.setPasswordMessage('Passwords do not match', 'error');
+      } else if (this.passwordForm.get('newPassword')?.hasError('minlength')) {
+        this.setPasswordMessage('Password must be at least 8 characters long', 'warning');
+      } else if (this.passwordForm.get('newPassword')?.hasError('pattern')) {
+        this.setPasswordMessage('Password must contain at least one uppercase letter and one number', 'warning');
+      } else {
+        this.setPasswordMessage('All fields are required', 'warning');
+      }
       return;
     }
 
-    if (this.newPassword !== this.confirmPassword) {
-      this.setPasswordMessage('The new passwords do not match', 'error');
-      return;
-    }
-
-    if (this.newPassword.length < 8) {
-      this.setPasswordMessage('The password must be at least 8 characters long', 'warning');
-      return;
-    }
-    if (!/[A-Z]/.test(this.newPassword)) {
-      this.setPasswordMessage('The password must contain at least one uppercase letter', 'warning');
-      return;
-    }
-    if (!/[0-9]/.test(this.newPassword)) {
-      this.setPasswordMessage('The password must contain at least one number', 'warning');
-      return;
-    }
+    const { oldPassword, newPassword } = this.passwordForm.value;
 
     try {
-      await changeUserPassword(this.oldPassword, this.newPassword);
+      await changeUserPassword(oldPassword, newPassword);
       this.setPasswordMessage('Password changed successfully', 'success');
-      form.resetForm();             // limpia los campos
+      this.passwordForm.reset();
     } catch (err: any) {
       this.setPasswordMessage('Error: ' + (err.message || err), 'error');
     }
   }
 
-  private setPasswordMessage(msg: string, type: 'success'|'warning'|'error') {
+  private setPasswordMessage(msg: string, type: 'success' | 'warning' | 'error') {
     this.passwordMessage = msg;
     this.passwordMessageType = type;
   }

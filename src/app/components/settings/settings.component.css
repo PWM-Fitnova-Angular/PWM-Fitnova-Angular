@@ -7,12 +7,13 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
+  font-family: Arial, sans-serif; /* Mejora la legibilidad */
 }
 
 .cont {
   background: #111;
   padding: 20px;
-  margin: 10px;
+  margin: 10px 0;
   width: 100%;
   max-width: 400px;
   border-radius: 15px;
@@ -20,93 +21,122 @@ body {
 }
 
 fieldset {
-  border: 2px solid #111;
+  border: 2px solid #222;
   border-radius: 15px;
   padding: 15px;
+  margin-bottom: 10px;
 }
 
-.message {
+legend {
+  color: #0A5E45;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.message, #password-message {
   margin-top: 15px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   text-align: center;
   width: 90%;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-height: 20px; /* Altura mínima cuando hay contenido */
 }
 
 .message-success {
-  background-color: #dff0d8;
+  background-color: rgba(223, 240, 216, 0.9);
   color: #3c763d;
   border: 1px solid #d6e9c6;
 }
 
 .message-error {
-  background-color: #f2dede;
+  background-color: rgba(242, 222, 222, 0.9);
   color: #a94442;
   border: 1px solid #ebccd1;
 }
 
 .message-warning {
-  background-color: #fcf8e3;
+  background-color: rgba(252, 248, 227, 0.9);
   color: #8a6d3b;
   border: 1px solid #faebcc;
 }
 
 .mode-label {
   font-size: 18px;
-  align-content: center;
-  align-items: center;
-  padding: 10px 0 0 10px;
+  padding: 10px 0 10px 0;
   margin-bottom: 5px;
+  font-weight: 500;
 }
 
 input[list], input[type="password"] {
   width: 90%;
-  padding: 10px;
-  align-content: center;
+  padding: 12px 15px;
   border-radius: 30px;
-  border: 1px solid #555;
+  border: 1px solid #444;
   background: #222;
   color: white;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
+  outline: none; /* Quita el borde al hacer focus */
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.change-button {
+input[list]:focus, input[type="password"]:focus {
+  border-color: #0A5E45;
+  box-shadow: 0 0 0 2px rgba(10, 94, 69, 0.3);
+}
+
+/* Estilo para inputs con errores de validación */
+input.ng-invalid.ng-touched {
+  border-color: #a94442;
+  box-shadow: 0 0 0 2px rgba(169, 68, 66, 0.2);
+}
+
+/* Radio buttons y checkboxes */
+input[type="radio"], input[type="checkbox"] {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+label {
+  margin: 8px 15px 8px 0;
+  cursor: pointer;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 12px;
+  margin: -5px 0 10px 15px;
+  text-align: left;
+}
+
+.change-button, .delete-button {
   display: block;
   width: 100%;
   text-align: center;
-  padding: 12px;
+  padding: 14px;
   margin-top: 20px;
   background-color: #0A5E45;
   color: white;
   cursor: pointer;
+  border: none;
   border-radius: 15px;
-  transition: background 0.3s;
-}
-
-.change-button:hover {
-  background-color: #088A68;
-}
-
-.delete-button {
-  display: block;
-  width: 100%;
-  text-align: center;
-  align-items: center;
-  align-content: center;
-  padding: 12px;
-  margin-top: 20px;
-  background-color: #0A5E45;
-  color: white;
-  cursor: pointer;
-  border-radius: 15px;
-  transition: background 0.3s;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s;
   text-decoration: none;
 }
 
-
-.delete-button:hover {
+.change-button:hover, .delete-button:hover {
   background-color: #088A68;
+  box-shadow: 0 0 15px rgba(8, 138, 104, 0.5);
+}
+
+/* Estilo para botones deshabilitados */
+.change-button:disabled, .delete-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 header, footer {
@@ -124,17 +154,24 @@ main.setting-container {
   flex-grow: 1;
   width: 100%;
   padding-bottom: 20px;
+  gap: 10px; /* Espacio uniforme entre elementos */
 }
 
-.setting-container div {
+/* Corregido para manejar correctamente el anidamiento */
+.setting-container > form,
+.setting-container > .cont,
+.setting-container > .but {
+  width: 100%;
+  max-width: 400px;
+}
+
+.but {
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 20px 20px;
-  width: 90%;
+  align-items: center;
+  width: 100%;
   max-width: 400px;
-  background: #111111;
-  border-radius: 12px;
-  text-align: center;
+  margin-top: 10px;
 }
 
 footer {
@@ -151,4 +188,12 @@ footer {
   max-width: 100vw;
 }
 
+/* Animación para los mensajes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
+#password-message {
+  animation: fadeIn 0.3s ease-in-out;
+}

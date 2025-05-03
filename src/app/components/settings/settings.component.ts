@@ -66,8 +66,8 @@ export class SettingsComponent implements OnInit {
       newPassword: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/.*[A-Z].*/),  // At least one uppercase letter
-        Validators.pattern(/.*[0-9].*/)   // At least one number
+        Validators.pattern(/.*[A-Z].*/),
+        Validators.pattern(/.*[0-9].*/)
       ]],
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });

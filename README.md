@@ -36,8 +36,9 @@ Ofrecemos herramientas personalizadas como recetas fitness, planificación nutri
   <li>Dentro se podrá navegar y acceder a cualquier sitio</li>
   <li>Excercises & Recipes: Tienen dos filtro y se puede pinchar en las imagene mostrando información</li>
   <li>Settings se puede editar el perfil y al pulsar "Save settings estos se guardaarán"</li>
+  <li>Pulsando "Dentro de session se puede eliminar la cuenta pulsando el boton delete y llevandote a un formulario donde al poner la contraseña, la cuenta se eliminará</li>
   <li>En settings está el formulario de cambiar contraseña basado en Angular</li>
-   <li>Pulsando "logout" se cerrará la sesión</li>
+  <li>Pulsando "logout" se cerrará la sesión</li>
 </ul>
 
 

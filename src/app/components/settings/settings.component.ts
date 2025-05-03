@@ -1,78 +1,112 @@
-import { Component } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {changeUserPassword, registerUser, saveUserData} from '../../../firebase/firebaseAuthService';
-import {onAuthStateChanged} from 'firebase/auth';
-import {auth} from '../../../firebase/firebase_config';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormsModule, NgForm} from '@angular/forms';
+import { changeUserPassword, saveUserData, getUserData } from '../../../firebase/firebaseAuthService';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../firebase/firebase_config';
+import {NgClass, NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
+
 
 @Component({
   selector: 'app-settings',
-  imports: [
-    RouterLink,
-    FormsModule
-  ],
   templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css'
+  imports: [
+    FormsModule,
+    NgClass,
+    RouterLink,
+    NgIf
+  ],
+  styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent {
-  darkMode: boolean = false;
-  notificationsEnabled: boolean = false;
+export class SettingsComponent implements OnInit{
+  darkMode = false;
+  notificationsEnabled = false;
   privacySetting: 'public' | 'private' = 'public';
-  language: string = "";
+  language = '';
+  uid = '';
 
+  oldPassword = '';
+  newPassword = '';
+  confirmPassword = '';
 
-  oldPassword: string = "";
-  newPassword: string = "";
-  confirmPassword: string = "";
-  uid: string = "";
+  passwordMessage = '';
+  passwordMessageType: 'success' | 'warning' | 'error' = 'success';
 
-  constructor(private router: Router) {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.uid = user.uid;
-        console.log('Usuario autenticado:', this.uid);
+  ngOnInit(): void {
+    onAuthStateChanged(auth, async user => {
+      if (!user) return;
+      this.uid = user.uid;
+
+      const data = await getUserData(this.uid);
+      if (data) {
+        this.darkMode             = !!data.darkMode;
+        this.notificationsEnabled = !!data.notificationsEnabled;
+        this.privacySetting       = data.privacySetting || 'public';
+        this.language             = data.language || '';
       }
     });
   }
 
-  async saveSettings() {
+  constructor() {
+    onAuthStateChanged(auth, user => {
+      if (user) this.uid = user.uid;
+    });
+  }
+
+  async saveSettings(): Promise<void> {
     if (!this.uid) {
       console.error("Usuario no autenticado");
       return;
     }
-
     const settingsData = {
       darkMode: this.darkMode,
       notificationsEnabled: this.notificationsEnabled,
       privacySetting: this.privacySetting,
       language: this.language
     };
-
     try {
       await saveUserData(this.uid, settingsData);
-      console.log("Settings guardados exitosamente.");
-    } catch (error) {
-      console.error("Error al guardar settings:", error);
+      alert('Settings guardados exitosamente.');
+    } catch {
+      alert('Error al guardar settings.');
     }
   }
 
-  async changeUserPassword() {
+  async changeUserPassword(form: NgForm) {
+    if (form.invalid) {
+      this.setPasswordMessage('All fields are required', 'warning');
+      return;
+    }
+
     if (this.newPassword !== this.confirmPassword) {
-      alert('Las nuevas contraseñas no coinciden.');
+      this.setPasswordMessage('The new passwords do not match', 'error');
+      return;
+    }
+
+    if (this.newPassword.length < 8) {
+      this.setPasswordMessage('The password must be at least 8 characters long', 'warning');
+      return;
+    }
+    if (!/[A-Z]/.test(this.newPassword)) {
+      this.setPasswordMessage('The password must contain at least one uppercase letter', 'warning');
+      return;
+    }
+    if (!/[0-9]/.test(this.newPassword)) {
+      this.setPasswordMessage('The password must contain at least one number', 'warning');
       return;
     }
 
     try {
       await changeUserPassword(this.oldPassword, this.newPassword);
-      alert('Contraseña cambiada exitosamente.');
-      this.oldPassword = "";
-      this.newPassword = "";
-      this.confirmPassword = "";
-    } catch (error: any) {
-      alert('Error al cambiar la contraseña: ' + (error?.message || ''));
+      this.setPasswordMessage('Password changed successfully', 'success');
+      form.resetForm();             // limpia los campos
+    } catch (err: any) {
+      this.setPasswordMessage('Error: ' + (err.message || err), 'error');
     }
   }
 
-
+  private setPasswordMessage(msg: string, type: 'success'|'warning'|'error') {
+    this.passwordMessage = msg;
+    this.passwordMessageType = type;
+  }
 }

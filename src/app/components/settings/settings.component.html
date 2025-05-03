@@ -3,24 +3,24 @@
 <main class="setting-container">
   <div class="cont">
     <label class="mode-label">Dark Mode</label>
-    <input type="checkbox" id="dark-mode" class="mode" [(ngModel)]="darkMode">
+    <input type="checkbox" id="dark-mode" class="mode" [(ngModel)]="darkMode" name="DarkMode">
   </div>
   <div class="cont">
     <fieldset>
       <legend class="mode-label">Profile</legend>
       <label for="public">Public</label>
-      <input type="radio" id="public" name="profile" value="public" [(ngModel)]="privacySetting">
+      <input type="radio" id="public"  value="public" [(ngModel)]="privacySetting" name="privacySetting">
       <label for="private">Private</label>
-      <input type="radio" id="private" name="profile" value="private" [(ngModel)]="privacySetting">
+      <input type="radio" id="private" name="privacySetting" value="private" [(ngModel)]="privacySetting">
     </fieldset>
   </div>
   <div class="cont">
     <fieldset>
       <legend class="mode-label">Email notification</legend>
       <label for="yes">Yes</label>
-      <input type="radio" id="yes" name="notify" value="yes" [(ngModel)]="notificationsEnabled">
+      <input type="radio" id="yes" name="notificationsEnabled" value="yes" [(ngModel)]="notificationsEnabled">
       <label for="no">No</label>
-      <input type="radio" id="no" name="notify" value="no"[(ngModel)]="notificationsEnabled">
+      <input type="radio" id="no" name="notificationsEnabled" value="no"[(ngModel)]="notificationsEnabled">
     </fieldset>
   </div>
   <div class="cont">
@@ -32,17 +32,64 @@
     </datalist>
   </div>
   <div class="cont">
+  <form #pwForm="ngForm" (ngSubmit)="changeUserPassword(pwForm)" novalidate>
     <fieldset>
-      <legend class="mode-label">Change Password</legend>
-      <label class="mode-label" for="old-password" >Old Password</label>
-      <input type="password" id="old-password" name="old-password" [(ngModel)]="oldPassword">
-      <label class = "mode-label" for="new-password">New Password</label>
-      <input type="password" id="new-password" name="new-password" [(ngModel)]="newPassword">
-      <label class = "mode-label" for="confirm-password">Confirm New Password</label>
-      <input type="password" id="confirm-password" name="confirm-password" [(ngModel)]="confirmPassword">
-      <button type="button" class="change-button" (click)="changeUserPassword()">Change</button>
-      <div id="password-message" class="message"></div>
+      <legend>Change Password</legend>
+
+      <label for="old-password">Old Password</label>
+      <input
+        id="old-password"
+        name="oldPassword"
+        type="password"
+        required
+        [(ngModel)]="oldPassword"
+        #oldPw="ngModel"
+      >
+      <div *ngIf="oldPw.invalid && (oldPw.dirty || oldPw.touched)" class="error">
+        <small *ngIf="oldPw.errors?.required">Old password is required.</small>
+      </div>
+
+      <label for="new-password">New Password</label>
+      <input
+        id="new-password"
+        name="newPassword"
+        type="password"
+        required minlength="8"
+        [(ngModel)]="newPassword"
+        #newPw="ngModel"
+      >
+      <div *ngIf="newPw.invalid && (newPw.dirty || newPw.touched)" class="error">
+        <small *ngIf="newPw.errors?.required">New password is required.</small>
+        <small *ngIf="newPw.errors?.minlength">At least 8 characters.</small>
+      </div>
+
+      <label for="confirm-password">Confirm New Password</label>
+      <input
+        id="confirm-password"
+        name="confirmPassword"
+        type="password"
+        required
+        [(ngModel)]="confirmPassword"
+        #confirmPw="ngModel"
+      >
+      <div *ngIf="confirmPw.invalid && (confirmPw.dirty || confirmPw.touched)" class="error">
+        <small *ngIf="confirmPw.errors?.required">Confirmation is required.</small>
+      </div>
+
+      <button class="delete-button" type="submit">Change</button>
+
+      <div
+        id="password-message"
+        [ngClass]="{
+          'message-success': passwordMessageType==='success',
+          'message-warning': passwordMessageType==='warning',
+          'message-error':   passwordMessageType==='error'
+        }"
+      >
+        {{ passwordMessage }}
+      </div>
     </fieldset>
+  </form>
   </div>
   <div class="but">
     <button class="delete-button" (click)="saveSettings()">Save Settings</button>

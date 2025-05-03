@@ -30,6 +30,7 @@ export class ExerciseRecipesComponent implements OnInit {
   allItems: any[] = [];
   cardItems: any[] = [];
   topFilterActive: string | null = null;
+  sideFilterActive: string | null = null;
 
   constructor(private router: Router, private exerciseService: ExerciseService, private recipeService: RecipeService) {}
 
@@ -85,18 +86,47 @@ export class ExerciseRecipesComponent implements OnInit {
 
   topFilter(item: string) {
 
-    item = item.split(' ')[0];
+    const parte = item.split(' ')[0];
 
-    if (this.topFilterActive === item) {
-      this.topFilterActive = null;
-      this.cardItems = [...this.allItems];
-    } else {
-      this.topFilterActive = item;
-      this.cardItems = this.allItems.filter(e =>
-        e.muscleGroups?.includes(item) || e.categories?.includes(item)
+    this.topFilterActive = (this.topFilterActive === parte) ? null : parte;
+    this.applyFilters();
+
+  }
+  sideFilter(item: string) {
+    const parte = item.split(' ')[0];
+
+    this.sideFilterActive = (this.sideFilterActive === parte) ? null : parte;
+    this.applyFilters();
+  }
+
+  private applyFilters() {
+
+
+
+    let cardsFiltered = [...this.allItems];
+
+
+    if (this.topFilterActive) {
+      const topFilter = this.topFilterActive;
+      cardsFiltered = cardsFiltered.filter(item =>
+        item.muscleGroups?.includes(topFilter) ||
+        item.categories?.includes(topFilter)
+      );
+
+    }
+
+    if (this.sideFilterActive) {
+      const sideFilter = this.sideFilterActive;
+      cardsFiltered = cardsFiltered.filter(item =>
+        item.equipment?.includes(sideFilter) ||
+        item.tags?.includes(sideFilter)
       );
     }
 
+
+    this.cardItems = cardsFiltered;
+
   }
+
 
 }

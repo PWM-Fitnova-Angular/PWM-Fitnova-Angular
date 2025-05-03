@@ -14,6 +14,7 @@ export class DetailsWorkoutRecipeComponent {
   constructor(private router:Router) {
     const nav = this.router.getCurrentNavigation();
     this.card = nav?.extras?.state?.['cardObject'];
+    console.log(this.card);
 
   }
 

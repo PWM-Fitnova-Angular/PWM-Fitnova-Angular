@@ -15,7 +15,10 @@
 
   <div class="container">
     <aside class="sidebar">
-      <div class="sidebar-item" *ngFor="let side of sideItems; let i = index">
+      <div class="sidebar-item"
+           *ngFor="let side of sideItems; let i = index"
+            (click)="sideFilter(side)"
+            [class.active]="sideFilterActive === side">
         <span class="icon"><i class="fas" [ngClass]="sideIcons[i]"></i></span>
         <span>{{ side }}</span>
       </div>

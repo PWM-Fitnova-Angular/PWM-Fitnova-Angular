@@ -1,9 +1,12 @@
-
-import {collection, doc, getDoc, getDocs, setDoc, updateDoc  } from 'firebase/firestore';
+import {doc, getDoc, setDoc, updateDoc} from 'firebase/firestore';
 import {auth, db} from './firebase_config';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
-
+import {
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  signInWithEmailAndPassword,
+  updatePassword
+} from "firebase/auth";
 
 
 async function createNewUser(uid: string, data: Object) {
@@ -29,8 +32,7 @@ export async function registerUser(email: string, password: string, data: Object
 
 export async function loginUser(email: string, password: string) {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    return userCredential;
+    return await signInWithEmailAndPassword(auth, email, password);
   } catch (error: any) {
     console.error('Error al iniciar sesión:', error.message);
     throw error;

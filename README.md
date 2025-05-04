@@ -89,6 +89,7 @@ recipes/
      ├── type: "Sweet"
      ├── description: "description...."
      ├── categories: ["Snack"]
+     ├── requirements: "Dark chocolate...."
      └── tags: ["Desserts"]
 
 
@@ -99,6 +100,7 @@ exercises/
     ├── type: "Hypertrophy"
     ├── description: "description....."
     ├── equipment: ["Machine"]
+    ├── requirements: "Leg curl machine...."
     └── muscleGroups: ["Leg"]
 ```
 

@@ -80,7 +80,15 @@ users/
     ├── nameSurname: "usuario"
     ├── notificationsEnabled: "yes"
     ├── privacySetting: "public"
-    └── selectedSex: "male"
+    ├── selectedSex: "male"
+    └── saved/
+         ├──{id1}
+         │   ├── id: exercise/recipe id
+         │   └── details: []
+         │
+         └──{id2}
+              ├── id: exercise/recipe id
+              └── details: []
 
 recipes/
  └── {recipeId}

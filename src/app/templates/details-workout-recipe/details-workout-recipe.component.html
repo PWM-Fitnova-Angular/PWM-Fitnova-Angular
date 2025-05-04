@@ -3,49 +3,37 @@
   <div class="main-content">
     <div class="image-container">
       <div class="placeholder-image">
-        <img [src]="card.imageUrl"  >
+        <img [src]="card.imageUrl">
       </div>
     </div>
     <div class="text-section">
       <h1>Description</h1>
-      <ul ></ul>
+      <ul></ul>
       {{card.description}}
     </div>
   </div>
 
   <div class="sidebar">
-    <h2>Lorem ipsum odor</h2>
+    <h2>Things you will need</h2>
     <div class="sidebar-items">
-      <div class="item">
+      <div class="item" *ngFor="let requirement of card.requirements">
         <span class="icon">✖</span>
-        <span>Dui vivamus lacinia</span>
-      </div>
-      <div class="item">
-        <span class="icon">✖</span>
-        <span>Leo venenatis risus</span>
-      </div>
-      <div class="item">
-        <span class="icon">✖</span>
-        <span>Dui vivamus lacinia</span>
-      </div>
-      <div class="item">
-        <span class="icon">✖</span>
-        <span>Leo venenatis risus</span>
+        <span>{{requirement}}</span>
       </div>
     </div>
-      <div class="select-group">
-        <label>Aliquam aptent lacinia facilisis</label>
-        <div class="select-box">
-          <span class="select-value">Saved</span>
-          <button
-            class="change-button"
-            (click)="saveCard()"
-            [disabled]="saving"
-          >
-            {{ saving ? 'Guardando…' : 'Save' }}
-          </button>
-        </div>
+    <div class="select-group">
+      <label>Personal brands</label>
+      <div class="select-box">
+        <span class="select-value">Saved</span>
+        <button
+          class="change-button"
+          (click)="saveCard()"
+          [disabled]="saving"
+        >
+          {{ saving ? 'Guardando…' : 'Save' }}
+        </button>
       </div>
     </div>
+  </div>
 </div>
 </body>

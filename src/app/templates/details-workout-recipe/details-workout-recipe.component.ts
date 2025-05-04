@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FavoritesService, Card } from 'app/services/favorites.service';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-details-workout-recipe',
   templateUrl: './details-workout-recipe.component.html',
+  imports: [
+    NgForOf
+  ],
   styleUrls: ['./details-workout-recipe.component.css']
 })
 export class DetailsWorkoutRecipeComponent {

@@ -8,6 +8,7 @@ export interface Card {
   type: string;
   imageUrl: string;
   description: string;
+  requirements: string[];
 }
 
 @Injectable({ providedIn: 'root' })

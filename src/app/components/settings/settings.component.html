@@ -1,7 +1,6 @@
 <body>
 <header id="header"></header>
 <main class="setting-container">
-  <!-- Formulario de configuraciones -->
   <form [formGroup]="settingsForm">
     <div class="cont">
       <label class="mode-label">Dark Mode</label>
@@ -38,7 +37,6 @@
     </div>
   </form>
 
-  <!-- Formulario de cambio de contraseña -->
   <div class="cont">
     <form [formGroup]="passwordForm" (ngSubmit)="changeUserPassword()">
       <fieldset>

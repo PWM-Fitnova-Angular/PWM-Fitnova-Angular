@@ -33,32 +33,20 @@
         <span>Leo venenatis risus</span>
       </div>
     </div>
-
-    <div class="input-sections">
-      <div class="select-group">
-        <label>Tincidunt in ultrices ornare</label>
-        <div class="select-box">
-          <span class="select-value">Saved 1</span>
-          <button class="change-button">Save</button>
-        </div>
-      </div>
-
       <div class="select-group">
         <label>Aliquam aptent lacinia facilisis</label>
         <div class="select-box">
-          <span class="select-value">Saved 2</span>
-          <button class="change-button">Save</button>
-        </div>
-      </div>
-
-      <div class="select-group">
-        <label>Dui vivamus lacinia suscipit</label>
-        <div class="select-box">
-          <span class="select-value">Saved 3</span>
-          <button class="change-button">Save</button>
+          <span class="select-value">Saved</span>
+          <button
+            class="change-button"
+            (click)="saveCard()"
+            [disabled]="saving"
+          >
+            {{ saving ? 'Guardando…' : 'Save' }}
+          </button>
         </div>
       </div>
     </div>
-  </div>
+</div>
 </div>
 </body>

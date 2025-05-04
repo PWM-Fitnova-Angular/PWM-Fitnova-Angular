@@ -1,22 +1,34 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FavoritesService, Card } from 'app/services/favorites.service';
 
 @Component({
   selector: 'app-details-workout-recipe',
-  imports: [],
   templateUrl: './details-workout-recipe.component.html',
-  styleUrl: './details-workout-recipe.component.css'
+  styleUrls: ['./details-workout-recipe.component.css']
 })
 export class DetailsWorkoutRecipeComponent {
+  card!: Card;
+  saving = false;
 
-  card:any;
-
-  constructor(private router:Router) {
+  constructor(
+    private router: Router,
+    private fav: FavoritesService
+  ) {
     const nav = this.router.getCurrentNavigation();
     this.card = nav?.extras?.state?.['cardObject'];
-    console.log(this.card);
-
   }
 
-
+  async saveCard() {
+    this.saving = true;
+    try {
+      await this.fav.save(this.card);
+      alert('Guardado correctamente');
+    } catch (e) {
+      console.error(e);
+      alert('Error al guardar');
+    } finally {
+      this.saving = false;
+    }
+  }
 }

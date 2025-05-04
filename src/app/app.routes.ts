@@ -11,7 +11,7 @@ import {PaymentComponent} from './components/payment/payment.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { DetailsWorkoutRecipeComponent } from './templates/details-workout-recipe/details-workout-recipe.component';
 import {SavedRecipesWorkoutsProgressComponent} from './templates/saved-recipes-workouts-progress/saved-recipes-workouts-progress.component';
-
+import {SaveExcercisesProgressComponent} from './templates/save-excercises-progress/save-excercises-progress.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' },
@@ -26,6 +26,9 @@ export const routes: Routes = [
   { path: 'payment', component: PaymentComponent},
   { path: 'delete', component: DeleteComponent},
   { path: 'details', component: DetailsWorkoutRecipeComponent},
-  { path: 'saved progress', component: SavedRecipesWorkoutsProgressComponent},
+  { path: 'saved-recipes', component: SavedRecipesWorkoutsProgressComponent},
+  { path: 'saved-exercises', component: SaveExcercisesProgressComponent},
   { path: '**' ,redirectTo: 'home', pathMatch: 'full' }
 ];
+
+export class AppRoutingModule { }

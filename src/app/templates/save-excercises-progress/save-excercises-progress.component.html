@@ -1,7 +1,7 @@
 <body>
 <div class="progress-saved">
-  <h2>Mis Ejercicios Guardados</h2>
-  <div *ngIf="loading">Cargando ejercicios…</div>
+  <h2>My Saved Exercises</h2>
+  <div *ngIf="loading">Loading exercises…</div>
   <div class="saved-grid" *ngIf="!loading && exercises.length">
     <div *ngFor="let ex of exercises" class="card-small" (click)="viewDetail(ex)">
       <div class="card-small-image">
@@ -13,6 +13,6 @@
       </div>
     </div>
   </div>
-  <p *ngIf="!loading && !exercises.length">No hay ejercicios guardados.</p>
+  <p *ngIf="!loading && !exercises.length">There are no saved exercises.</p>
 </div>
 </body>

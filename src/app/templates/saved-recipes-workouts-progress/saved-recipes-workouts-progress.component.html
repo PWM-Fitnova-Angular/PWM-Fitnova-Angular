@@ -1,7 +1,7 @@
 <body>
 <div class="progress-saved">
-  <h2>Mis Recetas Guardadas</h2>
-  <div *ngIf="loading">Cargando recetas…</div>
+  <h2>My Saved Recipes</h2>
+  <div *ngIf="loading">Loading recipes…</div>
   <div class="saved-grid" *ngIf="!loading && recipes.length">
     <div *ngFor="let r of recipes" class="card-small" (click)="viewDetail(r)">
       <div class="card-small-image">
@@ -13,6 +13,6 @@
       </div>
     </div>
   </div>
-  <p *ngIf="!loading && !recipes.length">No hay recetas guardadas.</p>
+  <p *ngIf="!loading && !recipes.length">There are no saved recipes.</p>
 </div>
 </body>

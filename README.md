@@ -106,25 +106,69 @@ exercises/
 
 ## Tour por la Página Web
 
-1. **Pantalla de Login/Registro**  
-   > El usuario puede registrarse o iniciar sesión con una cuenta existente.  
-   > Cuenta de prueba:  
-   > **Email:** pruebaentrega@gmail.com  
-   > **Contraseña:** Prueba12*
+### 1. Acceso y Autenticación
+- **Pantalla de Login/Registro**  
+  > El usuario puede registrarse o iniciar sesión con una cuenta existente.  
+  > Cuenta de prueba:  
+  > **Email:** pruebaentrega@gmail.com  
+  > **Contraseña:** Prueba12*
 
-2. **Home**  
-   > Una vez logueado, se accede al panel principal con los tipos de planes y una foto del usuario predeterminada.
+  La primera interacción del usuario con Fitnova es a través de la página de inicio de sesión o registro, donde se implementa un formulario reactivo de Angular.
 
-3. **Exercises & Recipes**  
-   > Páginas con filtros por tipo. Al hacer clic en una imagen, se muestra información detallada.
+### 2. Home
+- **Página Principal**  
+  > Una vez logueado, se accede al panel principal con los tipos de planes disponibles y el header con la foto de perfil del usuario.
+  > Se puede navegar a las diferentes secciones de la aplicación desde el menú principal.
 
-4. **Settings**  
-   > Se puede editar el perfil y guardar los cambios. También se puede eliminar la cuenta tras confirmar contraseña o cambiarla desde un formulario basado en Angular.
+### 3. Exercises & Recipes
+- **Catálogo de Ejercicios**  
+  > La página de ejercicios permite filtrar por:
+  > - Tipo de ejercicio (Hypertrophy, Cardio, etc.)
+  > - Grupo muscular (Leg, Arms, Chest, etc.)
+  > - Equipamiento necesario
+  > 
+  > Al hacer clic en un ejercicio, se muestra información detallada del mismo.
 
-5. **Logout**  
-   > El botón de cerrar sesión finaliza la sesión del usuario actual.
+- **Catálogo de Recetas**  
+  > Similar a los ejercicios, las recetas pueden filtrarse por:
+  > - Tipo (Sweet, Savory)
+  > - Categoría (Breakfast, Lunch, Dinner, Snack)
+  > - Tags específicos
+  >
+  > Los usuarios pueden guardar recetas favoritas para acceso rápido.
 
----
+### 4. Detalles y Guardado
+- **Visualización Detallada**
+  > Al seleccionar cualquier ejercicio o receta, se muestra una vista detallada con toda la información almacenada en Firestore.
+  > Los usuarios pueden guardar elementos seleccionados para acceder a ellos posteriormente desde su perfil.
+
+### 5. Settings
+- **Gestión de Perfil**  
+  > Se puede editar la información personal mediante un formulario reactivo de Angular validado.
+  > Los datos modificados se actualizan en tiempo real en Firebase.
+
+- **Configuración de la Cuenta**
+  > Opciones para cambiar la contraseña con validación de seguridad.
+  > Posibilidad de activar/desactivar notificaciones.
+  > Selección de idioma y preferencia de modo oscuro/claro.
+
+- **Eliminación de Cuenta**
+  > Los usuarios pueden eliminar su cuenta tras confirmar su contraseña como medida de seguridad.
+
+### 6. Logout
+- **Cierre de Sesión**  
+  > El botón de cerrar sesión finaliza la sesión del usuario actual usando Firebase Auth.
+  > Redirige al usuario a la pantalla de login.
+
+### Ejemplo de uso completo:
+1. El usuario inicia sesión con sus credenciales
+2. Navega a la sección de recetas y aplica filtros para encontrar snacks saludables
+3. Selecciona "Dark Chocolate Energy Balls" para ver detalles completos
+4. Guarda la receta en sus favoritos
+5. Desde configuración, actualiza sus preferencias de notificación
+6. Cierra sesión al finalizar
+
+Todo el proceso utiliza la infraestructura de Firebase para autenticación y almacenamiento de datos, mientras que Angular proporciona la reactividad y una experiencia de usuario fluida a través de componentes bien estructurados.
 
 ---
 
